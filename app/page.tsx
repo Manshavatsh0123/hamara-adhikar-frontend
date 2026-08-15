@@ -5,6 +5,7 @@ import PopularSchemes from "@/components/LandingPage/PopularSchemes";
 import SearchBar from "@/components/LandingPage/SearchBar";
 import PlatformStats from "@/components/LandingPage/PlatformStats";
 import HowItWorks from "@/components/LandingPage/HowItWorks";
+import Footer from "@/components/layout/Footer";
 
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
       <PopularSchemes />
       <HowItWorks />
       <PlatformStats />
+      <Footer />
     </main>
 
   );

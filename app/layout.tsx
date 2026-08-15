@@ -4,7 +4,6 @@ import { Manrope } from "next/font/google";
 import "./globals.css";
 
 import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 
 
 const manrope = Manrope({
@@ -142,8 +141,6 @@ export default function RootLayout({
         <main className="min-h-0 flex-1">
           {children}
         </main>
-
-        <Footer />
 
       </body>
     </html>

@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sahay Bihar
 
-## Getting Started
+### Citizen-Friendly Discovery & Guidance for Bihar Government Schemes
 
-First, run the development server:
+> **Find. Understand. Check. Apply.**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Sahay Bihar is a citizen-focused digital platform designed to make Bihar government schemes easier to **discover, understand, and access**.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Instead of requiring citizens to search across multiple departments and government portals, Sahay Bihar provides a unified discovery experience where users can describe their needs in simple language, find relevant schemes, check basic eligibility, understand the application process, and continue to the appropriate official government source.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Overview
 
-## Learn More
+Government schemes are available across multiple departments, portals, and service platforms.
 
-To learn more about Next.js, take a look at the following resources:
+For many citizens, especially users who may not be comfortable navigating complex digital systems, the challenge is often not the absence of government support but **finding the right information at the right time**.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Sahay Bihar addresses this discovery and guidance gap.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+A user does not need to know:
 
-## Deploy on Vercel
+- Which department manages a scheme
+- The exact name of a scheme
+- Which government portal to visit
+- Complex government terminology
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+They can simply describe their situation.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+For example:
+
+> **"I am a farmer from Bihar. Which schemes are available for me?"**
+
+Sahay Bihar processes the request, identifies relevant schemes, presents them in a simple format, provides a guided eligibility experience, and directs the user toward the appropriate official source.
+
+---
+
+# Problem
+
+Bihar has a large digital ecosystem covering government schemes and citizen services.
+
+However, information can be distributed across:
+
+- Multiple government departments
+- Department-specific portals
+- Scheme-specific websites
+- Application platforms
+- Service centres and assisted-service channels
+
+This can create several challenges for citizens:
+
+- Difficulty discovering relevant schemes
+- Lack of awareness about available benefits
+- Complicated navigation
+- Unfamiliar government terminology
+- Difficulty understanding eligibility requirements
+- Uncertainty about required documents
+- Confusion about where to apply
+
+Sahay Bihar is designed to simplify the **discovery and understanding** part of this journey.
+
+---
+
+# Solution
+
+Sahay Bihar acts as a **citizen-friendly discovery and guidance layer** over existing government information and services.
+
+It does not attempt to replace official government portals.
+
+Instead, it helps citizens move from:
+
+> **"I need help, but I don't know which scheme applies to me."**
+
+to:
+
+> **"I found the relevant scheme, understand the requirements, and know where to apply."**
+
+---
+
+# How It Works
+
+```text
+                    ┌──────────────────┐
+                    │      Citizen     │
+                    └────────┬─────────┘
+                             │
+                    Text / Voice Query
+                             │
+                             ▼
+                    ┌──────────────────┐
+                    │   Sahay Bihar    │
+                    │   Search / AI     │
+                    └────────┬─────────┘
+                             │
+                             ▼
+                    ┌──────────────────┐
+                    │ Intent & Context │
+                    │   Understanding  │
+                    └────────┬─────────┘
+                             │
+                             ▼
+                    ┌──────────────────┐
+                    │ Scheme Discovery │
+                    │ & Recommendation │
+                    └────────┬─────────┘
+                             │
+                             ▼
+                    ┌──────────────────┐
+                    │  Scheme Details  │
+                    └────────┬─────────┘
+                             │
+                             ▼
+                    ┌──────────────────┐
+                    │ Eligibility Check│
+                    └────────┬─────────┘
+                             │
+                             ▼
+                    ┌──────────────────┐
+                    │ Application Guide│
+                    └────────┬─────────┘
+                             │
+                             ▼
+                    ┌──────────────────┐
+                    │ Official Source  │
+                    └──────────────────┘
