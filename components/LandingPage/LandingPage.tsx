@@ -13,8 +13,7 @@ export default function Hero() {
     >
 
       <div
-        className="
-          relative
+        className="relative
           min-h-[540px]
           sm:min-h-[560px]
           lg:h-[580px]
@@ -240,8 +239,7 @@ export default function Hero() {
 
 
         <div
-          className="
-            relative
+          className=" relative
             mt-8
             h-[320px]
             w-full
