@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import {
   GraduationCap,
   Tractor,
@@ -6,262 +7,413 @@ import {
   BadgeIndianRupee,
   House,
   BriefcaseBusiness,
+  Wheat,
+  HeartPulse,
+  Accessibility,
+  Sprout,
+  BookOpen,
+  Landmark,
+  Users,
+  ShieldCheck,
+  Baby,
+  HandCoins,
   LucideIcon,
 } from "lucide-react";
-
-
 
 type Category = {
   id: string;
   title: string;
-  description: string;
   icon: LucideIcon;
+};
 
-  // Future API support
-  schemeCount?: number;
+const categoryIcons: Record<string, LucideIcon> = {
+  agriculture: Wheat,
+  anganwadi: Baby,
+  "backward class": Users,
+  "backward classes": Users,
+
+  bpl: HandCoins,
+
+  business: BriefcaseBusiness,
+  "capacity building": Landmark,
+
+  "child welfare": Baby,
+
+  "civil services": Landmark,
+  "competitive examination": BookOpen,
+
+  "construction worker": Users,
+  craftsmen: Users,
+
+  "crop assistance": Wheat,
+  "crop damage": Wheat,
+
+  "digital learning": BookOpen,
+
+  disability: Accessibility,
+  "disability assistance": Accessibility,
+  "disability support": Accessibility,
+
+  "dragon fruit development": Sprout,
+
+  education: GraduationCap,
+  employment: BriefcaseBusiness,
+  empowerment: ShieldCheck,
+
+  entrepreneurship: BriefcaseBusiness,
+
+  "equipment grant": HandCoins,
+
+  "extremely backward class": Users,
+  "extremely backward classes": Users,
+
+  farmer: Tractor,
+  "farmer welfare": Tractor,
+
+  "financial assistance": HandCoins,
+
+  fisheries: Wheat,
+  "fish farmer": Tractor,
+
+  "flood relief": House,
+
+  "free accommodation": House,
+  "free education": GraduationCap,
+
+  "girl student": GraduationCap,
+
+  healthcare: HeartPulse,
+  "higher education": GraduationCap,
+
+  horticulture: Sprout,
+  hostel: House,
+  irrigation: Wheat,
+
+  labour: Users,
+
+  "leprosy patient": HeartPulse,
+  library: BookOpen,
+
+  "livelihood support": HandCoins,
+
+  "makhana development": Sprout,
+  marriage: Users,
+  matric: GraduationCap,
+
+  minority: Users,
+  "minority welfare": Users,
+
+  "natural disaster": House,
+
+  "papaya development": Sprout,
+  pension: BadgeIndianRupee,
+  plantation: Sprout,
+  "plant supply": Sprout,
+  "pond development": Wheat,
+
+  "pre-school": Baby,
+
+  pwd: Accessibility,
+
+  "residential school": House,
+
+  "rural development": House,
+
+  "scheduled caste": Users,
+  "scheduled tribe": Users,
+
+  scholarship: GraduationCap,
+
+  "self employment": BriefcaseBusiness,
+
+  "skill development": BriefcaseBusiness,
+  "skill upgradation": BriefcaseBusiness,
+
+  "social security": ShieldCheck,
+  "social welfare": Users,
+
+  student: GraduationCap,
+  "student empowerment": GraduationCap,
+  "student loan": HandCoins,
+  "student welfare": GraduationCap,
+
+  subsidy: HandCoins,
+
+  "technology adoption": Landmark,
+
+  tools: BriefcaseBusiness,
+  training: BookOpen,
+
+  uniform: GraduationCap,
+
+  "unorganised workers": Users,
+  "unorganized workers": Users,
+
+  "vocational training": BriefcaseBusiness,
+
+  widow: Users,
+  "widow pension": BadgeIndianRupee,
+
+  women: UserRound,
+  "women welfare": UserRound,
+
+  youth: BriefcaseBusiness,
 };
 
 
-
-const categories: Category[] = [
-  {
-    id: "education",
-    title: "Education",
-    description: "Scholarships, education & student support",
-    icon: GraduationCap,
-    schemeCount: 12,
-  },
-
-  {
-    id: "farmers",
-    title: "Farmers",
-    description: "Agriculture, farming & financial support",
-    icon: Tractor,
-    schemeCount: 8,
-  },
-
-  {
-    id: "women",
-    title: "Women",
-    description: "Women empowerment & welfare schemes",
-    icon: UserRound,
-    schemeCount: 15,
-  },
-
-  {
-    id: "pension",
-    title: "Pension",
-    description: "Social security & senior citizen support",
-    icon: BadgeIndianRupee,
-    schemeCount: 7,
-  },
-
-  {
-    id: "housing",
-    title: "Housing",
-    description: "Housing, shelter & basic amenities",
-    icon: House,
-    schemeCount: 9,
-  },
-
-  {
-    id: "employment",
-    title: "Employment",
-    description: "Jobs, skills & livelihood opportunities",
-    icon: BriefcaseBusiness,
-    schemeCount: 11,
-  },
-];
+function getCategoryIcon(category: string): LucideIcon {
+  return (
+    categoryIcons[category.toLowerCase().trim()] ??
+    Landmark
+  );
+}
 
 
 export default function CategorySection() {
+
+
   return (
-    <section className="w-full bg-[#fbfcfa] py-16 sm:py-20">
+    <section className="relative w-full overflow-hidden bg-[#fbfdfb] py-14 sm:py-16">
 
-      <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-6">
+      {/* Very subtle background decoration */}
+      <div
+        className="
+          pointer-events-none
+          absolute
+          left-1/2
+          top-0
+          h-[320px]
+          w-[700px]
+          -translate-x-1/2
+          rounded-full
+          bg-[#eef8f1]
+          opacity-60
+          blur-3xl
+        "
+      />
+
+      <div className="relative mx-auto max-w-[1180px] px-5 sm:px-6">
 
 
-        <div className="mx-auto mb-11 max-w-[650px] text-center">
+        <div className="mx-auto mb-10 max-w-[650px] text-center">
 
-          {/* Small Label */}
-          <div className="mb-3 flex items-center justify-center gap-3">
+          {/* Label */}
 
-            <span className="h-px w-8 bg-[#75a988]" />
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#dcebe0] bg-white px-3.5 py-1.5 shadow-sm">
 
-            <span className="text-[13px] font-semibold uppercase tracking-[0.16em] text-[#4b8c63]">
-              Explore
+            <span className="h-1.5 w-1.5 rounded-full bg-[#08783f]" />
+
+            <span
+              className="
+                text-[11px]
+                font-semibold
+                uppercase
+                tracking-[0.16em]
+                text-[#08783f]
+              "
+            >
+              Explore Categories
             </span>
-
-            <span className="h-px w-8 bg-[#75a988]" />
 
           </div>
 
 
-          {/* Main Heading */}
+          {/* Heading */}
+
           <h2
             className="
-              text-3xl
+              text-[30px]
               font-bold
-              tracking-[-0.8px]
-              text-[#172033]
-              sm:text-4xl
+              leading-[1.15]
+              tracking-[-1px]
+              text-[#142033]
+              sm:text-[38px]
             "
           >
             Government{" "}
             <span className="text-[#08783f]">
               Schemes
             </span>{" "}
-            by Category
+            for Every Need
           </h2>
 
 
           {/* Description */}
+
           <p
             className="
               mx-auto
               mt-4
-              max-w-[540px]
-              text-sm
+              max-w-[570px]
+              text-[14px]
               leading-6
-              text-[#6b7280]
+              text-[#718096]
               sm:text-[15px]
             "
           >
-            Discover government schemes organized around your
-            needs, goals and everyday requirements.
+            Explore welfare, education, employment, agriculture
+            and social security schemes designed for the people of Bihar.
           </p>
 
         </div>
+
 
         <div
           className="
             grid
             grid-cols-2
-            gap-4
-            sm:gap-5
-            md:grid-cols-3
+            gap-3
+            sm:grid-cols-3
+            sm:gap-4
             lg:grid-cols-6
           "
         >
 
-          {categories.map((category) => {
-            const Icon = category.icon;
+          {[
+            "Disability Assistance",
+            "Disability Support",
+            "Dragon Fruit Development",
+            "Education",
+            "Employment",
+            "Empowerment",
+          ].map((title) => {
+
+            const Icon = getCategoryIcon(title);
 
             return (
               <button
-                key={category.id}
+                key={title}
                 type="button"
-                onClick={() => {
-                  // Future:
-                  // router.push(`/categories/${category.id}`)
-                }}
                 className="
                   group
                   relative
                   flex
-                  min-h-[225px]
+                  min-h-[175px]
                   flex-col
                   items-center
-                  overflow-hidden
-                  rounded-2xl
+                  justify-center
+                  rounded-[18px]
                   border
-                  border-[#e4e9e5]
+                  border-[#e4ebe6]
                   bg-white
                   px-4
-                  py-7
+                  py-6
                   text-center
-                  shadow-[0_3px_12px_rgba(20,60,35,0.045)]
                   transition-all
                   duration-300
+
                   hover:-translate-y-1
-                  hover:border-[#cfe1d4]
-                  hover:shadow-[0_12px_30px_rgba(20,80,40,0.10)]
+                  hover:border-[#cce2d2]
+                  hover:shadow-[0_12px_28px_rgba(8,120,63,0.08)]
+
+                  active:translate-y-0
                 "
               >
 
-                <div
+                {/* Top accent */}
+
+                <span
                   className="
                     absolute
                     left-1/2
                     top-0
-                    h-[3px]
+                    h-[2px]
                     w-0
                     -translate-x-1/2
                     rounded-b-full
                     bg-[#08783f]
                     transition-all
                     duration-300
-                    group-hover:w-14
+                    group-hover:w-10
                   "
                 />
+
+
+                {/* Icon */}
 
                 <div
                   className="
                     flex
-                    h-[62px]
-                    w-[62px]
+                    h-[58px]
+                    w-[58px]
                     items-center
                     justify-center
-                    rounded-2xl
-                    bg-[#eff8f1]
+                    rounded-[17px]
+                    bg-[#eff8f2]
                     ring-1
-                    ring-[#e0efe3]
+                    ring-[#dceee1]
                     transition-all
                     duration-300
-                    group-hover:bg-[#e5f4e8]
-                    group-hover:ring-[#cfe5d4]
-                    group-hover:scale-105
+
+                    group-hover:bg-[#e6f5ea]
+                    group-hover:ring-[#c9e5d1]
+                    group-hover:scale-[1.04]
                   "
                 >
                   <Icon
-                    size={34}
+                    size={29}
                     strokeWidth={1.8}
-                    className="text-[#08783f]"
+                    className="
+                      text-[#08783f]
+                      transition-transform
+                      duration-300
+                      group-hover:scale-105
+                    "
                   />
                 </div>
+
+
+                {/* Category name */}
 
                 <h3
                   className="
                     mt-5
-                    text-[15px]
-                    font-bold
+                    max-w-[150px]
+                    text-[14px]
+                    font-semibold
+                    leading-5
                     text-[#172033]
+                    transition-colors
+                    duration-200
+                    group-hover:text-[#08783f]
                   "
                 >
-                  {category.title}
+                  {title}
                 </h3>
-
-                <p
-                  className="
-                    mt-2
-                    min-h-[38px]
-                    max-w-[170px]
-                    text-[12px]
-                    leading-[18px]
-                    text-[#737b87]
-                  "
-                >
-                  {category.description}
-                </p>
-
-                {category.schemeCount !== undefined && (
-                  <div
-                    className="
-                      mt-auto
-                      pt-5
-                      text-[11px]
-                      font-semibold
-                      tracking-wide
-                      text-[#4f8f64]
-                    "
-                  >
-                    {category.schemeCount}+ Schemes
-                  </div>
-                )}
 
               </button>
             );
           })}
+
+        </div>
+
+
+        <div className="mt-8 flex items-center justify-center gap-1.5">
+
+          <span className="h-1.5 w-1.5 rounded-full bg-[#c9dfd0]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[#c9dfd0]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[#c9dfd0]" />
+
+          <span className="mx-1 h-1.5 w-7 rounded-full bg-[#08783f]" />
+
+          <span className="h-1.5 w-1.5 rounded-full bg-[#c9dfd0]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[#c9dfd0]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[#c9dfd0]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[#c9dfd0]" />
+
+        </div>
+
+        <div className="mt-7 flex items-center justify-center gap-2">
+
+          <ShieldCheck
+            size={14}
+            strokeWidth={1.8}
+            className="text-[#08783f]"
+          />
+
+          <span className="text-[11px] font-medium text-[#7b8b82]">
+            Government schemes, organized for you
+          </span>
 
         </div>
 
