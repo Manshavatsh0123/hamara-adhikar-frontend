@@ -13,6 +13,11 @@ type SchemeResponse = {
     data: Scheme;
 };
 
+type RandomSchemesResponse = {
+    success: boolean;
+    data: Scheme[];
+};
+
 export async function getSchemes(): Promise<Scheme[]> {
     const response = await apiClient<SchemesResponse>("/schemes");
 
@@ -24,6 +29,16 @@ export async function getScheme(
 ): Promise<Scheme> {
     const response = await apiClient<SchemeResponse>(
         `/schemes/${id}`
+    );
+
+    return response.data;
+}
+
+export async function getRandomSchemes(
+    limit = 5
+): Promise<Scheme[]> {
+    const response = await apiClient<RandomSchemesResponse>(
+        `/schemes/random?limit=${limit}`
     );
 
     return response.data;
