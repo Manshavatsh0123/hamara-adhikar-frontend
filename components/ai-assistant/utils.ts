@@ -1,5 +1,7 @@
-import type { AssistantResponse, Scheme } from "./types";
-import { SCHEMES, ALL_SUGGESTIONS } from "./data";
+import type {
+    AssistantResponse,
+    AssistantScheme,
+} from "./types";
 
 export const getTime = () =>
     new Date().toLocaleTimeString([], {
@@ -7,122 +9,292 @@ export const getTime = () =>
         minute: "2-digit",
     });
 
-function normalizeQuestion(value: string) {
-    return value.toLowerCase().replace(/[^\w\s₹]/g, " ");
+export const ALL_SUGGESTIONS = [
+    "I am a student from Bihar",
+    "I am a farmer from Bihar",
+    "I need financial assistance",
+    "I am looking for an education scheme",
+];
+
+/* =========================================================
+   CLEAN AI MARKDOWN
+========================================================= */
+
+export function cleanAIText(text: string): string {
+    if (!text) {
+        return "";
+    }
+
+    return text
+        .replace(/\r/g, "")
+        .replace(/```[\s\S]*?```/g, "")
+        .replace(/^#{1,6}\s*/gm, "")
+        .replace(/\*\*/g, "")
+        .replace(/__([^_]+)__/g, "$1")
+        .replace(/^\s*---+\s*$/gm, "")
+        .replace(/^\s*--+\s*$/gm, "")
+        .replace(/^\s*[-*•]\s+/gm, "")
+        .replace(/\n{3,}/g, "\n\n")
+        .trim();
 }
 
-export function buildAssistantResponse(question: string): AssistantResponse {
-    const q = normalizeQuestion(question);
+/* =========================================================
+   EXTRACT SECTION FROM AI RESPONSE
+========================================================= */
 
-    const isBihar =
-        q.includes("bihar") ||
-        q.includes("patna") ||
-        q.includes("resident");
+export function extractSection(
+    text: string,
+    sectionNames: string[]
+): string[] {
+    if (!text) {
+        return [];
+    }
 
-    const isFarmer =
-        q.includes("farmer") ||
-        q.includes("agriculture") ||
-        q.includes("kisan") ||
-        q.includes("farming") ||
-        q.includes("crop") ||
-        q.includes("irrigation");
+    const cleaned = text.replace(/\r/g, "");
 
-    const isStudent =
-        q.includes("student") ||
-        q.includes("education") ||
-        q.includes("college") ||
-        q.includes("school") ||
-        q.includes("study") ||
-        q.includes("scholarship");
+    const escapedNames = sectionNames.map((name) =>
+        name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+    );
 
-    const isFinancial =
-        q.includes("financial") ||
-        q.includes("money") ||
-        q.includes("loan") ||
-        q.includes("assistance") ||
-        q.includes("support");
+    const otherSections = [
+        "Eligibility",
+        "Benefits",
+        "Description & Benefits",
+        "Description and Benefits",
+        "Department",
+        "State",
+    ];
 
-    const isHousing =
-        q.includes("housing") ||
-        q.includes("house") ||
-        q.includes("home");
+    const otherNames = otherSections
+        .filter(
+            (name) =>
+                !sectionNames.some(
+                    (selected) =>
+                        selected.toLowerCase() ===
+                        name.toLowerCase()
+                )
+        )
+        .map((name) =>
+            name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+        )
+        .join("|");
 
-    const isEmployment =
-        q.includes("job") ||
-        q.includes("employment") ||
-        q.includes("skill") ||
-        q.includes("work");
+    const regex = new RegExp(
+        `(?:^|\\n)\\s*(?:[*#]+\\s*)?(?:${escapedNames.join(
+            "|"
+        )})(?:\\s*[*#]+)?\\s*:?\\s*([\\s\\S]*?)(?=\\n\\s*(?:[*#]+\\s*)?(?:${otherNames})(?:\\s*[*#]+)?\\s*:|\\n\\s*#{1,6}\\s*\\d+\\.|\\n\\s*---+|$)`,
+        "i"
+    );
 
-    const isSchemeRequest =
-        q.includes("scheme") ||
-        q.includes("yojana") ||
-        q.includes("benefit") ||
-        q.includes("eligible") ||
-        q.includes("eligibility") ||
-        q.includes("apply");
+    const match = cleaned.match(regex);
 
-    const isClearlyOutOfScope =
-        q.includes("weather") ||
-        q.includes("capital of") ||
-        q.includes("football") ||
-        q.includes("cricket") ||
-        q.includes("coding") ||
-        q.includes("javascript") ||
-        q.includes("react") ||
-        q.includes("movie") ||
-        q.includes("song");
+    if (!match?.[1]) {
+        return [];
+    }
 
-    if (isClearlyOutOfScope) {
+    return match[1]
+        .split(/\n+/)
+        .map((line) =>
+            line
+                .replace(/^\s*[-*•]\s*/, "")
+                .replace(/\*\*/g, "")
+                .replace(/^#+\s*/, "")
+                .replace(/^\s*:\s*/, "")
+                .trim()
+        )
+        .filter(Boolean);
+}
+
+/* =========================================================
+   FIND SCHEME SECTION
+========================================================= */
+
+export function getSchemeSection(
+    reply: string,
+    schemeName: string
+): string {
+    if (!reply || !schemeName) {
+        return "";
+    }
+
+    const escapedName = schemeName.replace(
+        /[.*+?^${}()|[\]\\]/g,
+        "\\$&"
+    );
+
+    const regex = new RegExp(
+        `#{1,6}\\s*\\d+\\.\\s*\\*{0,2}${escapedName}\\*{0,2}([\\s\\S]*?)(?=\\n\\s*---+|\\n\\s*#{1,6}\\s*\\d+\\.|$)`,
+        "i"
+    );
+
+    return reply.match(regex)?.[1] || "";
+}
+
+/* =========================================================
+   MAP BACKEND SCHEME → FRONTEND SCHEME
+========================================================= */
+
+export function mapBackendScheme(
+    source: {
+        id: number;
+        scheme_name: string;
+        department: string | null;
+        state: string | null;
+        description: string | null;
+        rank?: number;
+    },
+    reply: string
+): AssistantScheme {
+    const section = getSchemeSection(
+        reply,
+        source.scheme_name
+    );
+
+    let benefits = extractSection(section, [
+        "Benefits",
+        "Description & Benefits",
+        "Description and Benefits",
+    ]);
+
+    const eligibility = extractSection(section, [
+        "Eligibility",
+    ]);
+
+    /*
+     * Some Gemini responses put the entire
+     * Description & Benefits text on one line.
+     *
+     * If parsing still fails, use the database
+     * description as the benefit fallback.
+     */
+    if (benefits.length === 0 && source.description) {
+        benefits = [source.description];
+    }
+
+    return {
+        id: String(source.id),
+
+        name: source.scheme_name,
+
+        department:
+            source.department ||
+            "Government of Bihar",
+
+        state:
+            source.state ||
+            "Bihar",
+
+        description:
+            source.description ||
+            "Details are available from the concerned government department.",
+
+        rank: source.rank,
+
+        benefits,
+
+        eligibility,
+    };
+}
+
+/* =========================================================
+   CREATE FRONTEND RESPONSE
+========================================================= */
+
+export function createAssistantResponse(
+    reply: string,
+    sources: Array<{
+        id: number;
+        scheme_name: string;
+        department: string | null;
+        state: string | null;
+        description: string | null;
+        rank?: number;
+    }>
+): AssistantResponse {
+    const cleanReply = reply.trim();
+
+    const sortedSources = [...sources].sort(
+        (a, b) =>
+            (b.rank ?? 0) -
+            (a.rank ?? 0)
+    );
+
+    /*
+     * Remove duplicates by scheme ID.
+     */
+    const uniqueSources = sortedSources.filter(
+        (scheme, index, array) =>
+            index ===
+            array.findIndex(
+                (item) => item.id === scheme.id
+            )
+    );
+
+    /*
+     * Prefer schemes actually mentioned
+     * by the AI.
+     */
+    const mentionedSources =
+        uniqueSources.filter((source) =>
+            cleanReply
+                .toLowerCase()
+                .includes(
+                    source.scheme_name.toLowerCase()
+                )
+        );
+
+    const selectedSources =
+        mentionedSources.length > 0
+            ? mentionedSources
+            : uniqueSources.slice(0, 5);
+
+    if (selectedSources.length > 0) {
         return {
-            type: "out-of-scope",
-            title: "Let's find a Bihar government scheme",
+            type: "schemes",
+
+            title: "Schemes for You",
+
             subtitle:
-                "I’m designed to help you discover government schemes and benefits available in Bihar.",
-            suggestions: ALL_SUGGESTIONS,
+                "Government schemes that best match your question.",
+
+            /*
+             * Keep this internally.
+             * AssistantResponseCard will NOT display it.
+             */
+            reply: cleanReply,
+
+            schemes: selectedSources.map(
+                (source) =>
+                    mapBackendScheme(
+                        source,
+                        cleanReply
+                    )
+            ),
         };
     }
 
-    let schemes: Scheme[] = [];
-
-    if (isFarmer) {
-        schemes = SCHEMES.filter((scheme) =>
-            scheme.categories.includes("Agriculture")
-        );
-    } else if (isStudent) {
-        schemes = SCHEMES.filter((scheme) =>
-            scheme.categories.includes("Education")
-        );
-    } else if (isFinancial) {
-        schemes = SCHEMES.filter((scheme) =>
-            scheme.categories.includes("Financial Support")
-        );
-    } else if (isHousing || isEmployment) {
-        schemes = [];
-    } else if (isBihar || isSchemeRequest) {
-        schemes = SCHEMES;
-    }
-
-    if (schemes.length > 0) {
+    if (cleanReply) {
         return {
-            type: "schemes",
-            title:
-                isFarmer
-                    ? "Schemes for Farmers"
-                    : isStudent
-                        ? "Schemes for Students"
-                        : isFinancial
-                            ? "Financial Support Schemes"
-                            : "Schemes for You",
-            subtitle: `We found ${schemes.length} schemes that may be relevant based on your question.`,
-            schemes: schemes.slice(0, 3),
+            type: "clarification",
+
+            title: "Sahay AI",
+
+            subtitle: cleanAIText(cleanReply),
+
+            reply: cleanReply,
+
+            suggestions: ALL_SUGGESTIONS,
         };
     }
 
     return {
         type: "clarification",
+
         title: "Tell me a little more",
+
         subtitle:
-            "I can help you find the right Bihar government scheme. Tell me who you are or what kind of support you need.",
+            "Tell me whether you are a student, farmer, worker, senior citizen, or looking for financial assistance.",
+
         suggestions: ALL_SUGGESTIONS,
     };
 }

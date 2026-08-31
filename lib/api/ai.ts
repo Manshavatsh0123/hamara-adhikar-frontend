@@ -13,10 +13,14 @@ export type AISchemeResult = {
     rank?: number;
 };
 
+export type AIChatData = {
+    reply: string;
+    sources: AISchemeResult[];
+};
+
 export type AIChatResponse = {
-    schemes?: AISchemeResult[];
-    message?: string;
-    [key: string]: unknown;
+    success: boolean;
+    data: AIChatData;
 };
 
 export async function sendAIMessage(
@@ -24,6 +28,9 @@ export async function sendAIMessage(
 ): Promise<AIChatResponse> {
     return apiClient<AIChatResponse>("/ai/chat", {
         method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
         body: JSON.stringify(data),
     });
 }

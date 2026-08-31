@@ -1,97 +1,141 @@
-import { ChevronDown } from "lucide-react";
-import type { AssistantResponse, Scheme } from "./types";
-import { SCHEMES } from "./data";
-import { SchemeCard } from "./SchemeCard";
+import { Sparkles } from "lucide-react";
 
-export function AssistantResponseCard({
+import RecommendationHeader from "./RecommendationHeader";
+import SchemeCard from "./ SchemeCard";
+import type {
+    AssistantResponse,
+    AssistantScheme,
+} from "./types";
+import { cleanAIText } from "./utils";
+
+type AssistantResponseCardProps = {
+    response: AssistantResponse;
+
+    onSuggestion: (
+        value: string
+    ) => void;
+
+    onViewDetails: (
+        scheme: AssistantScheme
+    ) => void;
+};
+
+export default function AssistantResponseCard({
     response,
     onSuggestion,
-    onAction,
-}: {
-    response: AssistantResponse;
-    onSuggestion: (value: string) => void;
-    onAction: (scheme: Scheme, action: "details" | "eligibility") => void;
-}) {
+    onViewDetails,
+}: AssistantResponseCardProps) {
     return (
-        <div className="w-full max-w-[1040px]">
-            {response.type === "schemes" && response.schemes ? (
+        <div className="w-full max-w-[1080px]">
+            {response.type === "schemes" && (
                 <>
-                    <div className="mb-6">
-                        <div className="rounded-[22px] border border-[#dce9df] bg-white/94 px-5 py-5 shadow-[0_8px_28px_rgba(20,60,38,0.08)] backdrop-blur-xl sm:px-6">
-                            <div className="flex items-start gap-4">
-                                <div className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[#08783f] shadow-[0_0_0_6px_rgba(8,120,63,0.08)]" />
+                    <RecommendationHeader
+                        title={response.title}
+                        subtitle={response.subtitle}
+                    />
 
-                                <div className="min-w-0">
-                                    <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#08783f]">
-                                        Sahay AI Recommendations
-                                    </p>
-
-                                    <h2 className="mt-1 text-[22px] font-bold tracking-[-0.45px] text-[#142019] sm:text-[26px]">
-                                        {response.title}
-                                    </h2>
-
-                                    <p className="mt-1.5 max-w-[780px] text-[12px] leading-5 text-[#68756e] sm:text-[13px]">
-                                        {response.subtitle}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="space-y-4">
-                        {response.schemes.map((scheme) => (
-                            <SchemeCard
-                                key={scheme.id}
-                                scheme={scheme}
-                                onAction={onAction}
-                            />
-                        ))}
-
-                        {response.schemes.length < SCHEMES.length && (
-                            <div className="flex justify-center pt-1">
-                                <button
-                                    type="button"
-                                    onClick={() =>
-                                        onSuggestion("Show me more relevant schemes")
+                    <div className="space-y-5">
+                        {response.schemes?.map(
+                            (scheme) => (
+                                <SchemeCard
+                                    key={
+                                        scheme.id
                                     }
-                                    className="inline-flex items-center gap-2 rounded-full border border-[#cfe4d5] bg-white px-5 py-2.5 text-[12px] font-semibold text-[#08783f] shadow-[0_5px_16px_rgba(30,70,45,0.06)] transition hover:bg-[#f1f8f3]"
-                                >
-                                    View more schemes
-                                    <ChevronDown size={15} />
-                                </button>
-                            </div>
+                                    scheme={
+                                        scheme
+                                    }
+                                    onViewDetails={
+                                        onViewDetails
+                                    }
+                                />
+                            )
                         )}
                     </div>
+
+                    {/*
+                     * IMPORTANT:
+                     *
+                     * DO NOT render response.reply here.
+                     *
+                     * The backend reply is already represented
+                     * by the scheme cards.
+                     *
+                     * Rendering it again was causing:
+                     *
+                     * ### 1.
+                     * **Scheme Name**
+                     * **Benefits**
+                     *
+                     * to appear below the cards.
+                     */}
                 </>
-            ) : (
-                <>
-                    <div className="mb-3">
-                        <h2 className="text-[18px] font-bold text-[#172033] sm:text-[20px]">
-                            {response.title}
-                        </h2>
+            )}
 
-                        <p className="mt-1 text-[12px] leading-5 text-[#68756e] sm:text-[13px]">
-                            {response.subtitle}
-                        </p>
-                    </div>
+            {response.type === "clarification" && (
+                <div className="overflow-hidden rounded-[22px] border border-[#dfe8e2] bg-white/97 shadow-[0_10px_30px_rgba(30,70,45,0.07)]">
+                    <div className="border-l-[5px] border-[#08783f] bg-gradient-to-r from-[#eff9f1] to-white px-5 py-5">
+                        <div className="flex items-start gap-3">
+                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#dff1e4] text-[#08783f]">
+                                <Sparkles
+                                    size={18}
+                                />
+                            </div>
 
-                    {response.suggestions && (
-                        <div className="rounded-[20px] border border-[#e2ebe5] bg-white/90 p-4 shadow-[0_8px_28px_rgba(30,70,45,0.06)] backdrop-blur-xl">
-                            <div className="grid gap-2 sm:grid-cols-2">
-                                {response.suggestions.map((suggestion) => (
-                                    <button
-                                        key={suggestion}
-                                        type="button"
-                                        onClick={() => onSuggestion(suggestion)}
-                                        className="rounded-[14px] border border-[#e2ebe5] bg-[#f8faf8] px-3 py-2.5 text-left text-[12px] font-medium text-[#385044] transition hover:border-[#b8d6c1] hover:bg-[#eef7f0] hover:text-[#08783f]"
-                                    >
-                                        {suggestion}
-                                    </button>
-                                ))}
+                            <div>
+                                <div className="inline-flex items-center rounded-full bg-[#dff1e4] px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.08em] text-[#267144]">
+                                    Sahay AI
+                                </div>
+
+                                <h2 className="mt-2 text-[19px] font-bold text-[#172033]">
+                                    {response.title}
+                                </h2>
+
+                                <p className="mt-2 whitespace-pre-wrap text-[13px] leading-6 text-[#5e6c64]">
+                                    {cleanAIText(
+                                        response.subtitle
+                                    )}
+                                </p>
                             </div>
                         </div>
+                    </div>
+
+                    {response.suggestions &&
+                        response.suggestions.length >
+                            0 && (
+                            <div className="grid gap-2.5 p-5 sm:grid-cols-2">
+                                {response.suggestions.map(
+                                    (
+                                        suggestion
+                                    ) => (
+                                        <button
+                                            key={
+                                                suggestion
+                                            }
+                                            type="button"
+                                            onClick={() =>
+                                                onSuggestion(
+                                                    suggestion
+                                                )
+                                            }
+                                            className="rounded-[15px] border border-[#e1ebe4] bg-[#f8faf8] px-4 py-3 text-left text-[12px] font-semibold text-[#385044] transition hover:border-[#b8d6c1] hover:bg-[#eef7f0] hover:text-[#08783f]"
+                                        >
+                                            {
+                                                suggestion
+                                            }
+                                        </button>
+                                    )
+                                )}
+                            </div>
+                        )}
+                </div>
+            )}
+
+            {response.type === "error" && (
+                <div className="rounded-[20px] border border-[#eadfd9] bg-white/97 p-5 text-[13px] leading-6 text-[#6a5c56] shadow-sm">
+                    {cleanAIText(
+                        response.subtitle
                     )}
-                </>
+                </div>
             )}
         </div>
     );
