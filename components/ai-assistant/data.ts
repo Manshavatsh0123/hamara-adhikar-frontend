@@ -2,74 +2,18 @@ import type { Scheme } from "./types";
 
 export const SCHEMES: Scheme[] = [
     {
-        id: "student-credit-card",
-        name: "Bihar Student Credit Card Scheme",
-        department: "Department of Education, Government of Bihar",
+        id: 29,
+        scheme_code: "",
+        scheme_name:
+            "Mukhyamantri Pichhda Varg Evam Ati Pichhda Varg Kaushal Vikas Prashikshan Yojana",
+
+        department:
+            "Backward Classes and Extremely Backward Classes Welfare Department",
+
+        state: "Bihar",
+
         description:
-            "Provides education loan up to ₹4 lakh to students for higher education in Bihar at low interest.",
-        benefits: [
-            "Loan up to ₹4 Lakh",
-            "Low interest rate",
-            "For higher education",
-        ],
-        whoCanApply: ["Students", "Bihar Residents"],
-        categories: ["Education", "Financial Support"],
-    },
-    {
-        id: "pm-kisan",
-        name: "PM-KISAN Samman Nidhi Yojana",
-        department: "Department of Agriculture, Government of Bihar",
-        description:
-            "Financial assistance of ₹6,000 per year to eligible farmer families across India.",
-        benefits: [
-            "₹6,000 per year",
-            "Direct bank transfer",
-            "For eligible farmers",
-        ],
-        whoCanApply: ["Farmers", "Bihar Residents"],
-        categories: ["Agriculture", "Financial Support"],
-    },
-    {
-        id: "sinchai",
-        name: "Mukhyamantri Sinchai Yojana",
-        department: "Water Resources Department, Government of Bihar",
-        description:
-            "Financial assistance for minor irrigation, water conservation and related activities.",
-        benefits: [
-            "Assistance for irrigation",
-            "Water resource development",
-            "Support for farmers",
-        ],
-        whoCanApply: ["Farmers", "Bihar Residents"],
-        categories: ["Agriculture"],
-    },
-    {
-        id: "kanya-utthan",
-        name: "Mukhyamantri Kanya Utthan Yojana",
-        department: "Government of Bihar",
-        description:
-            "Financial support for eligible girls and women through different stages of education.",
-        benefits: [
-            "Education support",
-            "Financial assistance",
-            "Support for eligible beneficiaries",
-        ],
-        whoCanApply: ["Eligible girls", "Bihar Residents"],
-        categories: ["Education", "Financial Support"],
-    },
-    {
-        id: "student-protsahan",
-        name: "Bihar Student Protsahan Yojana",
-        department: "Government of Bihar",
-        description:
-            "Financial assistance for eligible students under Bihar government student support programmes.",
-        benefits: [
-            "Student financial support",
-            "Education assistance",
-            "For eligible students",
-        ],
-        whoCanApply: ["Students", "Bihar Residents"],
-        categories: ["Education", "Financial Support"],
+            "The Mukhyamantri Pichhda Varg Evam Ati Pichhda Varg Kaushal Vikas Prashikshan Yojana is implemented by the Backward Classes and Extremely Backward Classes Welfare Department, Government of Bihar. The scheme aims to improve the employability and income-generating capacity of youth belonging to the Backward Class (BC) and Extremely Backward Class (EBC) communities through free domain-specific skill development training. Training is conducted through Bihar Skill Development Mission (BSDM) approved Skill Development Centres (SDCs), enabling beneficiaries to secure employment or become self-employed.",
     },
 ];
 

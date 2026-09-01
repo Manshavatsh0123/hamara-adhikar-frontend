@@ -4,10 +4,10 @@ import {
     Sprout,
 } from "lucide-react";
 
-import type { FrontendScheme } from "./types";
+import type { AssistantScheme } from "./types";
 
 type Props = {
-    scheme: FrontendScheme;
+    scheme: AssistantScheme;
 };
 
 export default function SchemeIcon({

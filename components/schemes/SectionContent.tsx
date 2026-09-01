@@ -4,12 +4,14 @@ import {
     HelpCircle,
     ClipboardList,
     ShieldCheck,
+    Info,
 } from "lucide-react";
 
-import type { SchemeData } from "@/types/scheme";
+import type { Scheme } from "@/types/scheme";
 
 type Props = {
-    scheme: SchemeData;
+    scheme: Scheme;
+
     section:
         | "benefits"
         | "eligibility"
@@ -22,64 +24,79 @@ export default function SectionContent({
     scheme,
     section,
 }: Props) {
+    /* =====================================================
+       BENEFITS
+    ===================================================== */
+
     if (section === "benefits") {
         return (
-            <Section title="Benefits" icon={<CheckCircle2 size={20} />}>
-                <div className="grid gap-3 sm:grid-cols-2">
-                    {(scheme.benefits ?? []).map((benefit) => (
-                        <div
-                            key={benefit}
-                            className="flex gap-3 rounded-xl bg-[#f3f9f5] p-5"
-                        >
-                            <CheckCircle2
-                                size={19}
-                                className="mt-0.5 shrink-0 text-[#08783f]"
-                            />
+            <Section
+                title="Benefits"
+                icon={<CheckCircle2 size={20} />}
+            >
+                <div className="rounded-2xl border border-[#e1ebe4] bg-[#f8fbf9] p-5">
+                    <div className="flex items-start gap-3">
+                        <CheckCircle2
+                            size={20}
+                            className="mt-0.5 shrink-0 text-[#08783f]"
+                        />
 
-                            <span className="text-sm leading-6 text-[#405047]">
-                                {benefit}
-                            </span>
+                        <div>
+                            <h3 className="font-semibold text-[#142019]">
+                                Scheme Benefits
+                            </h3>
+
+                            <p className="mt-1 text-sm leading-6 text-[#59665e]">
+                                {scheme.description ||
+                                    "Benefit details are not available in the scheme information."}
+                            </p>
                         </div>
-                    ))}
+                    </div>
                 </div>
             </Section>
         );
     }
+
+    /* =====================================================
+       ELIGIBILITY
+    ===================================================== */
 
     if (section === "eligibility") {
         return (
             <Section
-                title={scheme.eligibility?.title ?? "Eligibility"}
+                title="Eligibility"
                 icon={<ShieldCheck size={20} />}
             >
-                {scheme.eligibility?.description ? (
-                    <p className="mb-6 text-[15px] leading-7 text-[#526158]">
-                        {scheme.eligibility.description}
-                    </p>
-                ) : null}
+                <div className="rounded-2xl border border-[#e1ebe4] bg-[#f8fbf9] p-5">
+                    <div className="flex items-start gap-3">
+                        <ShieldCheck
+                            size={20}
+                            className="mt-0.5 shrink-0 text-[#08783f]"
+                        />
 
-                <div className="space-y-3">
-                    {(scheme.eligibility?.criteria ?? []).map(
-                        (criterion) => (
-                            <div
-                                key={criterion}
-                                className="flex items-start gap-3 rounded-xl border border-[#e1ebe4] bg-white p-4"
-                            >
-                                <CheckCircle2
-                                    size={18}
-                                    className="mt-0.5 shrink-0 text-[#08783f]"
-                                />
+                        <div>
+                            <h3 className="font-semibold text-[#142019]">
+                                Eligibility Information
+                            </h3>
 
-                                <span className="text-sm text-[#405047]">
-                                    {criterion}
-                                </span>
-                            </div>
-                        )
-                    )}
+                            <p className="mt-1 text-sm leading-6 text-[#59665e]">
+                                Detailed eligibility criteria for{" "}
+                                <span className="font-semibold text-[#405047]">
+                                    {scheme.scheme_name}
+                                </span>{" "}
+                                can be checked using the eligibility
+                                checker.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </Section>
         );
     }
+
+    /* =====================================================
+       DOCUMENTS
+    ===================================================== */
 
     if (section === "documents") {
         return (
@@ -87,26 +104,33 @@ export default function SectionContent({
                 title="Documents Required"
                 icon={<FileText size={20} />}
             >
-                <div className="space-y-3">
-                    {(scheme.documents ?? []).map((document) => (
-                        <div
-                            key={document}
-                            className="flex items-center gap-3 rounded-xl border border-[#e1ebe4] bg-white p-4"
-                        >
-                            <FileText
-                                size={18}
-                                className="text-[#08783f]"
-                            />
+                <div className="rounded-2xl border border-[#e1ebe4] bg-[#f8fbf9] p-5">
+                    <div className="flex items-start gap-3">
+                        <FileText
+                            size={20}
+                            className="mt-0.5 shrink-0 text-[#08783f]"
+                        />
 
-                            <span className="text-sm text-[#405047]">
-                                {document}
-                            </span>
+                        <div>
+                            <h3 className="font-semibold text-[#142019]">
+                                Document Information
+                            </h3>
+
+                            <p className="mt-1 text-sm leading-6 text-[#59665e]">
+                                Required document details are not
+                                included in the basic scheme
+                                information.
+                            </p>
                         </div>
-                    ))}
+                    </div>
                 </div>
             </Section>
         );
     }
+
+    /* =====================================================
+       HOW TO APPLY
+    ===================================================== */
 
     if (section === "how-to-apply") {
         return (
@@ -114,53 +138,82 @@ export default function SectionContent({
                 title="How to Apply"
                 icon={<ClipboardList size={20} />}
             >
-                <div className="space-y-5">
-                    {(scheme.howToApply ?? []).map((step) => (
-                        <div
-                            key={step.step}
-                            className="flex gap-4"
-                        >
-                            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#08783f] text-sm font-bold text-white">
-                                {step.step}
-                            </div>
-
-                            <div>
-                                <h3 className="font-bold text-[#142019]">
-                                    {step.title}
-                                </h3>
-
-                                <p className="mt-1 text-sm leading-6 text-[#59665e]">
-                                    {step.description}
-                                </p>
-                            </div>
+                <div className="space-y-4">
+                    <div className="flex gap-4 rounded-2xl border border-[#e1ebe4] bg-[#f8fbf9] p-5">
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#08783f] text-sm font-bold text-white">
+                            1
                         </div>
-                    ))}
+
+                        <div>
+                            <h3 className="font-bold text-[#142019]">
+                                Check Eligibility
+                            </h3>
+
+                            <p className="mt-1 text-sm leading-6 text-[#59665e]">
+                                Check whether you meet the eligibility
+                                requirements for{" "}
+                                {scheme.scheme_name}.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="flex gap-4 rounded-2xl border border-[#e1ebe4] bg-[#f8fbf9] p-5">
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#08783f] text-sm font-bold text-white">
+                            2
+                        </div>
+
+                        <div>
+                            <h3 className="font-bold text-[#142019]">
+                                Follow the Official Application Process
+                            </h3>
+
+                            <p className="mt-1 text-sm leading-6 text-[#59665e]">
+                                Follow the application instructions
+                                provided by the concerned government
+                                department.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </Section>
         );
     }
 
-    return (
-        <Section title="Frequently Asked Questions" icon={<HelpCircle size={20} />}>
-            <div className="space-y-3">
-                {(scheme.faqs ?? []).map((faq) => (
-                    <details
-                        key={faq.question}
-                        className="group rounded-xl border border-[#e1ebe4] bg-white p-5"
-                    >
-                        <summary className="cursor-pointer list-none font-semibold text-[#142019]">
-                            {faq.question}
-                        </summary>
+    /* =====================================================
+       FAQ
+    ===================================================== */
 
-                        <p className="mt-3 text-sm leading-6 text-[#59665e]">
-                            {faq.answer}
+    return (
+        <Section
+            title="Frequently Asked Questions"
+            icon={<HelpCircle size={20} />}
+        >
+            <div className="rounded-2xl border border-[#e1ebe4] bg-[#f8fbf9] p-5">
+                <div className="flex items-start gap-3">
+                    <HelpCircle
+                        size={20}
+                        className="mt-0.5 shrink-0 text-[#08783f]"
+                    />
+
+                    <div>
+                        <h3 className="font-semibold text-[#142019]">
+                            About this scheme
+                        </h3>
+
+                        <p className="mt-1 text-sm leading-6 text-[#59665e]">
+                            {scheme.description ||
+                                "More information about this scheme is not available."}
                         </p>
-                    </details>
-                ))}
+                    </div>
+                </div>
             </div>
         </Section>
     );
 }
+
+/* =========================================================
+   SECTION WRAPPER
+========================================================= */
 
 function Section({
     title,
@@ -174,7 +227,7 @@ function Section({
     return (
         <section className="rounded-[24px] border border-[#dfe9e2] bg-white p-6 shadow-[0_10px_35px_rgba(18,55,35,0.06)] sm:p-8">
             <div className="mb-7 flex items-center gap-3 border-b border-[#edf2ee] pb-5">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#eaf7ef] text-[#08783f]">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#eaf7ef] text-[#08783f]">
                     {icon}
                 </div>
 
