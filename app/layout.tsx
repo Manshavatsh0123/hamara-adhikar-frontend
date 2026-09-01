@@ -5,144 +5,139 @@ import "./globals.css";
 
 import Navbar from "@/components/layout/Navbar";
 
-
 const manrope = Manrope({
-  variable: "--font-manrope",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
+    variable: "--font-manrope",
+    subsets: ["latin"],
+    display: "swap",
+    weight: ["400", "500", "600", "700", "800"],
 });
 
-
 export const metadata: Metadata = {
-  title: {
-    default: "Sahay Bihar | Government Schemes Made Simple",
-    template: "%s | Sahay Bihar",
-  },
+    metadataBase: new URL(
+        "https://YOUR-DOMAIN.com"
+    ),
 
-  description:
-    "Discover Bihar government schemes, check eligibility, understand benefits, and find the right scheme for you — all in one place.",
-
-  applicationName: "Sahay Bihar",
-
-  keywords: [
-    "Bihar government schemes",
-    "Bihar schemes",
-    "government schemes Bihar",
-    "Bihar Yojana",
-    "Bihar Sarkari Yojana",
-    "government schemes",
-    "Bihar welfare schemes",
-    "scheme eligibility",
-    "Bihar government services",
-    "Sahay Bihar",
-  ],
-
-  authors: [
-    {
-      name: "Sahay Bihar",
+    title: {
+        default:
+            "Sahay Bihar | Bihar Government Schemes & Eligibility",
+        template:
+            "%s | Sahay Bihar",
     },
-  ],
-
-  creator: "Sahay Bihar",
-
-  publisher: "Sahay Bihar",
-
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
-  },
-
-  icons: {
-    icon: [
-      {
-        url: "/logo.png",
-        type: "image/png",
-      },
-    ],
-
-    shortcut: "/logo.png",
-
-    apple: [
-      {
-        url: "/logo.png",
-        type: "image/png",
-      },
-    ],
-  },
-
-
-
-  openGraph: {
-    title: "Sahay Bihar | Government Schemes Made Simple",
 
     description:
-      "Find Bihar government schemes, check eligibility, and discover the right benefits for you.",
+        "Find Bihar government schemes, check eligibility, understand benefits, required documents and application information — all in one place.",
 
-    siteName: "Sahay Bihar",
+    applicationName: "Sahay Bihar",
 
-    type: "website",
-
-    locale: "en_IN",
-
-    images: [
-      {
-        url: "/Logo.png",
-        width: 1200,
-        height: 630,
-        alt: "Sahay Bihar - Government Schemes Made Simple",
-      },
+    keywords: [
+        "Bihar government schemes",
+        "Bihar Sarkari Yojana",
+        "Bihar government schemes eligibility",
+        "Bihar schemes",
+        "Bihar Yojana",
+        "Bihar welfare schemes",
+        "Bihar government services",
+        "scheme eligibility",
+        "Bihar scheme benefits",
+        "Sahay Bihar",
     ],
-  },
 
-  twitter: {
-    card: "summary_large_image",
+    authors: [
+        {
+            name: "Sahay Bihar",
+        },
+    ],
 
-    title: "Sahay Bihar | Government Schemes Made Simple",
+    creator: "Sahay Bihar",
+    publisher: "Sahay Bihar",
 
-    description:
-      "Discover Bihar government schemes, eligibility, benefits and application information.",
+    alternates: {
+        canonical: "/",
+    },
 
-    images: ["/og-image.png"],
-  },
+    robots: {
+        index: true,
+        follow: true,
 
-  category: "Government",
+        googleBot: {
+            index: true,
+            follow: true,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+            "max-video-preview": -1,
+        },
+    },
+
+    icons: {
+        icon: "/Logo.png",
+        shortcut: "/Logo.png",
+        apple: "/Logo.png",
+    },
+
+    openGraph: {
+        title:
+            "Sahay Bihar | Bihar Government Schemes & Eligibility",
+
+        description:
+            "Find Bihar government schemes, check eligibility, benefits, documents and application information.",
+
+        siteName: "Sahay Bihar",
+
+        type: "website",
+
+        locale: "en_IN",
+
+        url: "/",
+
+        images: [
+            {
+                url: "/og-image.png",
+                width: 1200,
+                height: 630,
+                alt:
+                    "Sahay Bihar - Bihar Government Schemes",
+            },
+        ],
+    },
+
+    twitter: {
+        card: "summary_large_image",
+
+        title:
+            "Sahay Bihar | Bihar Government Schemes & Eligibility",
+
+        description:
+            "Discover Bihar government schemes, eligibility, benefits and application information.",
+
+        images: ["/og-image.png"],
+    },
+
+    category: "Government",
 };
-
 
 export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  themeColor: "#08783f",
+    width: "device-width",
+    initialScale: 1,
+    themeColor: "#08783f",
 };
 
-
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
-  return (
-    <html
-      lang="en"
-      className={`${manrope.variable} h-full antialiased`}
-    >
-      <body className="min-h-full bg-white font-sans text-[#172033]">
+    return (
+        <html
+            lang="en"
+            className={`${manrope.variable} h-full antialiased`}
+        >
+            <body className="min-h-full bg-white font-sans text-[#172033]">
+                <Navbar />
 
-        <Navbar />
-
-        <main className="min-h-0 flex-1">
-          {children}
-        </main>
-
-      </body>
-    </html>
-  );
+                <main className="min-h-0 flex-1">
+                    {children}
+                </main>
+            </body>
+        </html>
+    );
 }
