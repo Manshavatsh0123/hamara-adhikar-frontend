@@ -66,9 +66,12 @@ type FormData = {
     disability: boolean;
 };
 
-const API_URL =
-    process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/$/, "") ||
-    "http://localhost:5000";
+const API_URL = (
+    process.env.NEXT_PUBLIC_API_URL ||
+    "http://localhost:5000"
+).replace(/\/$/, "");
+
+const API_BASE_URL = `${API_URL}/api`;
 
 const NOT_CONFIGURED_MESSAGES = [
     "eligibility rules not found",
@@ -245,7 +248,7 @@ export default function EligibilityDetails({
 
         try {
             const response = await fetch(
-                `${API_URL}/api/eligibility`,
+                `${API_BASE_URL}/eligibility`,
                 {
                     method: "POST",
                     headers: {
