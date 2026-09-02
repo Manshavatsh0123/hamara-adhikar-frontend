@@ -1,8 +1,12 @@
-const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/api`;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "");
 
-if (!API_URL) {
-    throw new Error("NEXT_PUBLIC_API_URL is not configured");
+if (!API_BASE_URL) {
+    throw new Error(
+        "NEXT_PUBLIC_API_URL is not configured. Please add it to your environment variables."
+    );
 }
+
+const API_URL = `${API_BASE_URL}/api`;
 
 export async function apiClient<T>(
     endpoint: string,
@@ -34,3 +38,4 @@ export async function apiClient<T>(
 
     return response.json();
 }
+

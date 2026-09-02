@@ -5,31 +5,63 @@ import Image from "next/image";
 import { ArrowLeft, Sparkles } from "lucide-react";
 import { usePathname } from "next/navigation";
 
+import ActionButton from "@/components/ui/ActionButton";
+
 export default function Navbar() {
     const pathname = usePathname();
+
     const isAIAssistantPage = pathname === "/ai-assistant";
 
     return (
-        <header className="sticky top-0 z-50 border-b border-[#edf1ee] bg-white/95 backdrop-blur-md">
+        <header className="sticky top-0 z-50 w-full border-b border-[#edf1ee] bg-white/95 backdrop-blur-md">
+            <div
+                className="
+                    mx-auto flex h-16 w-full max-w-[1280px]
+                    items-center justify-between
+                    px-4
+                    sm:h-[68px] sm:px-6
+                    lg:h-[72px] lg:px-8
+                "
+            >
 
-            <div className=" mx-auto flex h-[72px] w-full max-w-[1200px] items-center justify-between px-5 sm:px-6">
-
-                <Link href="/" className="group flex items-center gap-3">
-
-                    <div className="relative h-[45px] w-[45px] shrink-0 sm:h-[50px] sm:w-[50px]">
+                <Link
+                    href="/"
+                    className="group flex min-w-0 items-center gap-2.5 sm:gap-3"
+                    aria-label="Sahay Bihar home"
+                >
+                    {/* Logo */}
+                    <div
+                        className="
+                            relative shrink-0
+                            h-9 w-9
+                            sm:h-11 sm:w-11
+                            lg:h-12 lg:w-12
+                        "
+                    >
                         <Image
                             src="/Logo.png"
                             alt="Sahay Bihar"
                             fill
                             priority
-                            sizes="70px"
+                            sizes="48px"
                             className="object-contain"
                         />
                     </div>
 
-                    <div className="flex flex-col justify-center">
-
-                        <span className="text-[21px] font-extrabold leading-none tracking-[-0.04em] text-[#173c2b] sm:text-[24px]">
+                    {/* Brand text */}
+                    <div className="flex min-w-0 flex-col justify-center">
+                        <span
+                            className="
+                                truncate
+                                text-[18px]
+                                font-extrabold
+                                leading-none
+                                tracking-[-0.04em]
+                                text-[#173c2b]
+                                sm:text-[21px]
+                                lg:text-[23px]
+                            "
+                        >
                             Sahay{" "}
                             <span className="text-[#08783f]">
                                 Bihar
@@ -37,60 +69,58 @@ export default function Navbar() {
                         </span>
 
                         <span
-                            className="mt-1 text-[9px] font-semibold uppercase tracking-[0.13em] text-[#718078] sm:text-[10px] sm:tracking-[0.15em]"
+                            className="
+                                mt-1
+                                hidden
+                                text-[9px]
+                                font-semibold
+                                uppercase
+                                tracking-[0.12em]
+                                text-[#718078]
+                                sm:block
+                                sm:text-[9px]
+                                lg:text-[10px]
+                                lg:tracking-[0.14em]
+                            "
                         >
                             Your Guide to Bihar Government Schemes
                         </span>
-
                     </div>
-
                 </Link>
 
+
                 {isAIAssistantPage ? (
-                    <Link
+                    <ActionButton
                         href="/"
-                        className="group flex items-center gap-2 rounded-full border border-[#cfe4d5] bg-[#f5faf6] px-4 py-2.5 text-sm font-semibold text-[#08783f] shadow-[0_2px_8px_rgba(8,120,63,0.05)] transition-all duration-200 hover:border-[#08783f] hover:bg-[#08783f] hover:text-white hover:shadow-[0_6px_18px_rgba(8,120,63,0.15)] sm:px-5"
-                        aria-label="Back to home"
-                    >
-                        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#dff1e4] transition-colors group-hover:bg-white/15">
+                        variant="secondary"
+                        icon={
                             <ArrowLeft
                                 size={15}
-                                strokeWidth={2}
+                                strokeWidth={2.2}
                             />
-                        </span>
-
-                        <span className="hidden sm:inline">
-                            Back
-                        </span>
-
-                        <span className="sm:hidden">
-                            Back
-                        </span>
-                    </Link>
-                ) : (
-                    <Link
-                        href="/ai-assistant"
-                        className="group flex items-center gap-2 rounded-full border border-[#cfe4d5] bg-[#f5faf6] px-4 py-2.5 text-sm font-semibold text-[#08783f] shadow-[0_2px_8px_rgba(8,120,63,0.05)] transition-all duration-200 hover:border-[#08783f] hover:bg-[#08783f] hover:text-white hover:shadow-[0_6px_18px_rgba(8,120,63,0.15)] sm:px-5"
+                        }
+                        mobileLabel="Back"
+                        ariaLabel="Back to home"
                     >
-                        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#dff1e4] transition-colors group-hover:bg-white/15">
+                        Back
+                    </ActionButton>
+                ) : (
+                    <ActionButton
+                        href="/ai-assistant"
+                        variant="primary"
+                        icon={
                             <Sparkles
                                 size={15}
                                 strokeWidth={2}
                             />
-                        </span>
-
-                        <span className="hidden sm:inline">
-                            Ask Sahay AI
-                        </span>
-
-                        <span className="sm:hidden">
-                            Ask AI
-                        </span>
-                    </Link>
+                        }
+                        mobileLabel="Ask AI"
+                        ariaLabel="Ask Sahay AI"
+                    >
+                        Ask Sahay AI
+                    </ActionButton>
                 )}
-
             </div>
-
         </header>
     );
 }
