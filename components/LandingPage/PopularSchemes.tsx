@@ -311,26 +311,13 @@ export default function PopularSchemes() {
                     </div>
 
                     <div
-                        className="
-                            mt-12
-                            grid
-                            grid-cols-1
-                            gap-5
-                            sm:grid-cols-2
-                            lg:grid-cols-3
+                        className=" mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3
                         "
                     >
                         {Array.from({ length: 3 }).map((_, index) => (
                             <div
                                 key={index}
-                                className="
-                                    min-h-[295px]
-                                    animate-pulse
-                                    rounded-2xl
-                                    border
-                                    border-[#e8eee9]
-                                    bg-white
-                                    p-6
+                                className=" min-h-[295px] animate-pulse rounded-2xl border border-[#e8eee9] bg-white p-6
                                 "
                             >
                                 <div className="h-14 w-14 rounded-2xl bg-[#edf5ef]" />
@@ -356,26 +343,11 @@ export default function PopularSchemes() {
         return (
             <section className="w-full bg-[#fbfdfb] py-16 sm:py-20 lg:py-24">
                 <div
-                    className="
-                        mx-auto
-                        w-full
-                        max-w-[1200px]
-                        px-5
-                        sm:px-6
-                        lg:px-8
+                    className=" mx-auto w-full max-w-[1200px] px-5 sm:px-6 lg:px-8
                     "
                 >
                     <div
-                        className="
-                            mx-auto
-                            max-w-[520px]
-                            rounded-2xl
-                            border
-                            border-[#e5ebe7]
-                            bg-white
-                            p-8
-                            text-center
-                            shadow-[0_8px_30px_rgba(25,70,40,0.05)]
+                        className=" mx-auto max-w-[520px] rounded-2xl border border-[#e5ebe7] bg-white p-8 text-center shadow-[0_8px_30px_rgba(25,70,40,0.05)]
                         "
                     >
                         <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#edf8f0]">
@@ -397,20 +369,7 @@ export default function PopularSchemes() {
                         <button
                             type="button"
                             onClick={() => void loadSchemes()}
-                            className="
-                                mt-6
-                                inline-flex
-                                items-center
-                                gap-2
-                                rounded-xl
-                                bg-[#08783f]
-                                px-5
-                                py-3
-                                text-sm
-                                font-semibold
-                                text-white
-                                transition
-                                hover:bg-[#066b38]
+                            className=" mt-6 inline-flex items-center gap-2 rounded-xl bg-[#08783f] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#066b38]
                             "
                         >
                             <RefreshCw size={16} />
@@ -425,44 +384,17 @@ export default function PopularSchemes() {
     return (
         <section className="relative w-full overflow-hidden bg-[#fbfdfb] py-16 sm:py-20 lg:py-24">
             <div
-                className="
-                    pointer-events-none
-                    absolute
-                    -left-40
-                    top-16
-                    h-80
-                    w-80
-                    rounded-full
-                    bg-[#eaf7ee]
-                    opacity-70
-                    blur-3xl
+                className=" pointer-events-none absolute -left-40 top-16 h-80 w-80 rounded-full bg-[#eaf7ee] opacity-70 blur-3xl
                 "
             />
 
             <div
-                className="
-                    pointer-events-none
-                    absolute
-                    -right-40
-                    bottom-0
-                    h-80
-                    w-80
-                    rounded-full
-                    bg-[#edf8f1]
-                    opacity-70
-                    blur-3xl
+                className=" pointer-events-none absolute -right-40 bottom-0 h-80 w-80 rounded-full bg-[#edf8f1] opacity-70 blur-3xl
                 "
             />
 
             <div
-                className="
-                    relative
-                    mx-auto
-                    w-full
-                    max-w-[1200px]
-                    px-5
-                    sm:px-6
-                    lg:px-8
+                className=" relative mx-auto w-full max-w-[1200px] px-5 sm:px-6 lg:px-8
                 "
             >
                 <div className="mx-auto max-w-[720px] text-center">
@@ -475,14 +407,7 @@ export default function PopularSchemes() {
                     </div>
 
                     <h2
-                        className="
-                            mt-5
-                            text-3xl
-                            font-bold
-                            tracking-[-1px]
-                            text-[#172033]
-                            sm:text-4xl
-                            lg:text-[42px]
+                        className=" mt-5 text-3xl font-bold tracking-[-1px] text-[#172033] sm:text-4xl lg:text-[42px]
                         "
                     >
                         Lokpriya Sarkari{" "}
@@ -492,14 +417,7 @@ export default function PopularSchemes() {
                     </h2>
 
                     <p
-                        className="
-                            mx-auto
-                            mt-4
-                            max-w-[600px]
-                            text-sm
-                            leading-6
-                            text-[#707987]
-                            sm:text-[15px]
+                        className=" mx-auto mt-4 max-w-[600px] text-sm leading-6 text-[#707987] sm:text-[15px]
                         "
                     >
                         Bihar ke logon ke liye useful aur popular government
@@ -509,14 +427,7 @@ export default function PopularSchemes() {
 
                 {schemes.length > 0 ? (
                     <div
-                        className="
-                            mt-10
-                            grid
-                            grid-cols-1
-                            gap-5
-                            sm:mt-12
-                            sm:grid-cols-2
-                            lg:grid-cols-3
+                        className=" mt-10 grid grid-cols-1 gap-5 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3
                         "
                     >
                         {schemes.slice(0, 3).map((scheme) => {
@@ -529,60 +440,17 @@ export default function PopularSchemes() {
                                 <Link
                                     key={scheme.id}
                                     href={`/schemes/${scheme.id}`}
-                                    className="
-                                        group
-                                        relative
-                                        flex
-                                        min-h-[295px]
-                                        flex-col
-                                        overflow-hidden
-                                        rounded-2xl
-                                        border
-                                        border-[#e4ebe6]
-                                        bg-white
-                                        p-6
-                                        shadow-[0_4px_18px_rgba(25,70,40,0.045)]
-                                        transition-all
-                                        duration-300
-                                        hover:-translate-y-1
-                                        hover:border-[#cfe2d5]
-                                        hover:shadow-[0_16px_38px_rgba(20,80,40,0.11)]
+                                    className=" group relative flex min-h-[295px] flex-col overflow-hidden rounded-2xl border border-[#e4ebe6] bg-white p-6 shadow-[0_4px_18px_rgba(25,70,40,0.045)] transition-all duration-300 hover:-translate-y-1 hover:border-[#cfe2d5] hover:shadow-[0_16px_38px_rgba(20,80,40,0.11)]
                                     "
                                 >
                                     <div
-                                        className="
-                                            absolute
-                                            left-6
-                                            right-6
-                                            top-0
-                                            h-[3px]
-                                            origin-center
-                                            scale-x-0
-                                            rounded-b-full
-                                            bg-[#08783f]
-                                            transition-transform
-                                            duration-300
-                                            group-hover:scale-x-100
+                                        className=" absolute left-6 right-6 top-0 h-[3px] origin-center scale-x-0 rounded-b-full bg-[#08783f] transition-transform duration-300 group-hover:scale-x-100
                                         "
                                     />
 
                                     <div className="flex items-start justify-between">
                                         <div
-                                            className="
-                                                flex
-                                                h-14
-                                                w-14
-                                                items-center
-                                                justify-center
-                                                rounded-2xl
-                                                bg-[#eef8f1]
-                                                ring-1
-                                                ring-[#dceee1]
-                                                transition-all
-                                                duration-300
-                                                group-hover:scale-105
-                                                group-hover:bg-[#e5f5e9]
-                                            "
+                                            className=" flex h-14 w-14 items-center justify-center rounded-2xl bg-[#eef8f1] ring-1 ring-[#dceee1] transition-all duration-300 group-hover:scale-105 group-hover:bg-[#e5f5e9] "
                                         >
                                             <SchemeIcon
                                                 size={27}
@@ -592,94 +460,45 @@ export default function PopularSchemes() {
                                         </div>
 
                                         <span
-                                            className="
-                                                rounded-full
-                                                bg-[#f5f8f5]
-                                                px-2.5
-                                                py-1
-                                                text-[10px]
-                                                font-semibold
-                                                text-[#6b8171]
-                                            "
-                                        >
+                                            className=" rounded-full bg-[#f5f8f5] px-2.5 py-1 text-[10px] font-semibold text-[#6b8171]
+                                            ">
                                             Bihar
                                         </span>
                                     </div>
 
                                     <div
-                                        className="
-                                            mt-5
-                                            text-[10px]
-                                            font-bold
-                                            uppercase
-                                            tracking-[0.12em]
-                                            text-[#4f9566]
+                                        className=" mt-5 text-[10px] font-bold uppercase tracking-[0.12em] text-[#4f9566]
                                         "
                                     >
                                         {label}
                                     </div>
 
                                     <h3
-                                        className="
-                                            mt-2
-                                            line-clamp-3
-                                            text-[16px]
-                                            font-bold
-                                            leading-[22px]
-                                            text-[#172033]
-                                            transition-colors
-                                            group-hover:text-[#08783f]
+                                        className=" mt-2 line-clamp-3 text-[16px] font-bold leading-[22px] text-[#172033] transition-colors group-hover:text-[#08783f]
                                         "
                                     >
                                         {getShortTitle(scheme.scheme_name)}
                                     </h3>
 
                                     <p
-                                        className="
-                                            mt-3
-                                            line-clamp-2
-                                            text-[11px]
-                                            font-medium
-                                            leading-[17px]
-                                            text-[#8a929d]
-                                        "
-                                    >
+                                        className=" mt-3 line-clamp-2 text-[11px] font-medium leading-[17px] text-[#8a929d]
+                                        ">
                                         {formatDepartment(scheme.department)}
                                     </p>
 
                                     <p
-                                        className="
-                                            mt-3
-                                            line-clamp-3
-                                            text-[12px]
-                                            leading-[18px]
-                                            text-[#737b87]
-                                        "
-                                    >
+                                        className=" mt-3 line-clamp-3 text-[12px] leading-[18px] text-[#737b87]
+                                        ">
                                         {getShortDescription(scheme.description)}
                                     </p>
 
                                     <div
-                                        className="
-                                            mt-auto
-                                            flex
-                                            items-center
-                                            justify-between
-                                            border-t
-                                            border-[#edf1ee]
-                                            pt-5
+                                        className=" mt-auto flex items-center justify-between border-t border-[#edf1ee] pt-5
                                         "
                                     >
                                         <span
-                                            className="
-                                                inline-flex
-                                                items-center
-                                                gap-1.5
-                                                text-[11px]
-                                                font-semibold
-                                                text-[#08783f]
-                                            "
-                                        >
+                                            className=" inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#08783f]
+                                            ">
                                             <CheckCircle2
                                                 size={14}
                                                 strokeWidth={2}
@@ -688,19 +507,7 @@ export default function PopularSchemes() {
                                         </span>
 
                                         <span
-                                            className="
-                                                flex
-                                                h-8
-                                                w-8
-                                                items-center
-                                                justify-center
-                                                rounded-full
-                                                bg-[#f2f8f3]
-                                                text-[#08783f]
-                                                transition-all
-                                                duration-300
-                                                group-hover:bg-[#08783f]
-                                                group-hover:text-white
+                                            className=" flex h-8 w-8 items-center justify-center rounded-full bg-[#f2f8f3] text-[#08783f] transition-all duration-300 group-hover:bg-[#08783f] group-hover:text-white
                                             "
                                         >
                                             <ArrowRight size={15} />
@@ -712,18 +519,8 @@ export default function PopularSchemes() {
                     </div>
                 ) : (
                     <div
-                        className="
-                            mt-10
-                            rounded-2xl
-                            border
-                            border-[#e6ece8]
-                            bg-white
-                            px-6
-                            py-12
-                            text-center
-                            shadow-[0_4px_18px_rgba(25,70,40,0.035)]
-                        "
-                    >
+                        className=" mt-10 rounded-2xl border border-[#e6ece8] bg-white px-6 py-12 text-center shadow-[0_4px_18px_rgba(25,70,40,0.035)]
+                        ">
                         <BookOpen
                             size={30}
                             className="mx-auto text-[#08783f]"
@@ -744,28 +541,8 @@ export default function PopularSchemes() {
                         type="button"
                         onClick={() => void loadSchemes(true)}
                         disabled={refreshing}
-                        className="
-                            inline-flex
-                            items-center
-                            gap-2
-                            rounded-xl
-                            border
-                            border-[#dce9df]
-                            bg-white
-                            px-4
-                            py-2.5
-                            text-sm
-                            font-medium
-                            text-[#657269]
-                            shadow-[0_2px_8px_rgba(25,70,40,0.04)]
-                            transition-all
-                            hover:border-[#bcd8c5]
-                            hover:text-[#08783f]
-                            hover:shadow-[0_5px_16px_rgba(25,70,40,0.07)]
-                            disabled:cursor-not-allowed
-                            disabled:opacity-60
-                        "
-                    >
+                        className=" inline-flex items-center gap-2 rounded-xl border border-[#dce9df] bg-white px-4 py-2.5 text-sm font-medium text-[#657269] shadow-[0_2px_8px_rgba(25,70,40,0.04)] transition-all hover:border-[#bcd8c5] hover:text-[#08783f] hover:shadow-[0_5px_16px_rgba(25,70,40,0.07)] disabled:cursor-not-allowed disabled:opacity-60
+                        ">
                         <RefreshCw
                             size={15}
                             className={refreshing ? "animate-spin" : ""}

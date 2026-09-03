@@ -132,18 +132,7 @@ export default function CategorySection() {
     return (
         <section className="relative w-full overflow-hidden bg-[#fbfdfb] py-16 sm:py-20 lg:py-24">
             <div
-                className="
-                    pointer-events-none
-                    absolute
-                    left-1/2
-                    top-0
-                    h-[360px]
-                    w-[760px]
-                    -translate-x-1/2
-                    rounded-full
-                    bg-[#eef8f1]
-                    opacity-70
-                    blur-3xl
+                className=" pointer-events-none absolute left-1/2 top-0 h-[360px] w-[760px] -translate-x-1/2 rounded-full bg-[#eef8f1] opacity-70 blur-3xl
                 "
             />
 
@@ -153,13 +142,7 @@ export default function CategorySection() {
                         <span className="h-1.5 w-1.5 rounded-full bg-[#08783f]" />
 
                         <span
-                            className="
-                                text-[10px]
-                                font-semibold
-                                uppercase
-                                tracking-[0.16em]
-                                text-[#08783f]
-                                sm:text-[11px]
+                            className=" text-[10px] font-semibold uppercase tracking-[0.16em] text-[#08783f] sm:text-[11px]
                             "
                         >
                             Explore Categories
@@ -167,14 +150,7 @@ export default function CategorySection() {
                     </div>
 
                     <h2
-                        className="
-                            text-[30px]
-                            font-bold
-                            leading-[1.15]
-                            tracking-[-1px]
-                            text-[#142033]
-                            sm:text-[36px]
-                            md:text-[40px]
+                        className=" text-[30px] font-bold leading-[1.15] tracking-[-1px] text-[#142033] sm:text-[36px] md:text-[40px]
                         "
                     >
                         Har Zaroorat Ke Liye{" "}
@@ -184,15 +160,7 @@ export default function CategorySection() {
                     </h2>
 
                     <p
-                        className="
-                            mx-auto
-                            mt-4
-                            max-w-[600px]
-                            text-[14px]
-                            leading-6
-                            text-[#718096]
-                            sm:text-[15px]
-                            sm:leading-7
+                        className=" mx-auto mt-4 max-w-[600px] text-[14px] leading-6 text-[#718096] sm:text-[15px] sm:leading-7
                         "
                     >
                         Education, employment, agriculture, healthcare aur
@@ -202,15 +170,7 @@ export default function CategorySection() {
                 </div>
 
                 <div
-                    className="
-                        mt-10
-                        grid
-                        grid-cols-2
-                        gap-3
-                        sm:mt-12
-                        sm:grid-cols-3
-                        sm:gap-4
-                        lg:grid-cols-6
+                    className=" mt-10 grid grid-cols-2 gap-3 sm:mt-12 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6
                     "
                 >
                     {categories.map((title) => {
@@ -220,103 +180,31 @@ export default function CategorySection() {
                             <button
                                 key={title}
                                 type="button"
-                                className="
-                                    group
-                                    relative
-                                    flex
-                                    min-h-[170px]
-                                    flex-col
-                                    items-center
-                                    justify-center
-                                    overflow-hidden
-                                    rounded-[20px]
-                                    border
-                                    border-[#e1ebe4]
-                                    bg-white
-                                    px-4
-                                    py-6
-                                    text-center
-                                    shadow-[0_4px_18px_rgba(23,60,43,0.035)]
-                                    transition-all
-                                    duration-300
-                                    hover:-translate-y-1
-                                    hover:border-[#c8dfcf]
-                                    hover:shadow-[0_14px_30px_rgba(8,120,63,0.09)]
-                                    active:translate-y-0
+                                className=" group relative flex min-h-[170px] flex-col items-center justify-center overflow-hidden rounded-[20px] border border-[#e1ebe4] bg-white px-4 py-6 text-center shadow-[0_4px_18px_rgba(23,60,43,0.035)] transition-all duration-300 hover:-translate-y-1 hover:border-[#c8dfcf] hover:shadow-[0_14px_30px_rgba(8,120,63,0.09)] active:translate-y-0
                                 "
                             >
                                 <span
-                                    className="
-                                        absolute
-                                        left-1/2
-                                        top-0
-                                        h-[2px]
-                                        w-0
-                                        -translate-x-1/2
-                                        rounded-b-full
-                                        bg-[#08783f]
-                                        transition-all
-                                        duration-300
-                                        group-hover:w-12
-                                    "
-                                />
+                                    className=" absolute left-1/2 top-0 h-[2px] w-0 -translate-x-1/2 rounded-b-full bg-[#08783f] transition-all duration-300 group-hover:w-12 "/>
 
                                 <div
-                                    className="
-                                        flex
-                                        h-[58px]
-                                        w-[58px]
-                                        items-center
-                                        justify-center
-                                        rounded-[17px]
-                                        bg-[#eff8f2]
-                                        ring-1
-                                        ring-[#dceee1]
-                                        transition-all
-                                        duration-300
-                                        group-hover:scale-105
-                                        group-hover:bg-[#e6f5ea]
-                                        group-hover:ring-[#c9e5d1]
-                                    "
+                                    className=" flex h-[58px] w-[58px] items-center justify-center rounded-[17px] bg-[#eff8f2] ring-1 ring-[#dceee1] transition-all duration-300 group-hover:scale-105 group-hover:bg-[#e6f5ea] group-hover:ring-[#c9e5d1]"
                                 >
                                     <Icon
                                         size={28}
                                         strokeWidth={1.8}
-                                        className="
-                                            text-[#08783f]
-                                            transition-transform
-                                            duration-300
-                                            group-hover:scale-105
-                                        "
+                                        className=" text-[#08783f] transition-transform duration-300 group-hover:scale-105"
                                     />
                                 </div>
 
                                 <h3
-                                    className="
-                                        mt-5
-                                        max-w-[155px]
-                                        text-[13px]
-                                        font-semibold
-                                        leading-5
-                                        text-[#172033]
-                                        transition-colors
-                                        duration-200
-                                        group-hover:text-[#08783f]
-                                        sm:text-[14px]
+                                    className=" mt-5 max-w-[155px] text-[13px] font-semibold leading-5 text-[#172033] transition-colors duration-200 group-hover:text-[#08783f] sm:text-[14px]
                                     "
                                 >
                                     {title}
                                 </h3>
 
                                 <span
-                                    className="
-                                        mt-1
-                                        text-[10px]
-                                        font-medium
-                                        text-[#94a19a]
-                                        transition-colors
-                                        duration-200
-                                        group-hover:text-[#57936d]
+                                    className=" mt-1 text-[10px] font-medium text-[#94a19a] transition-colors duration-200 group-hover:text-[#57936d]
                                     "
                                 >
                                     Explore schemes

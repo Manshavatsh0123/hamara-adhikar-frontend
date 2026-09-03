@@ -457,12 +457,10 @@ export default function AIAssistantPage() {
         setShowEligibility(false);
     };
 
+    const showAISearchBar = !selectedScheme;
 
     return (
         <main className="relative flex h-[calc(100dvh-72px)] min-h-0 flex-col overflow-hidden bg-[#fdfcf8]">
-            {/* =================================================
-                BACKGROUND
-            ================================================= */}
 
             <div className="pointer-events-none absolute inset-0">
                 <Image
@@ -481,9 +479,6 @@ export default function AIAssistantPage() {
                 <div className="absolute inset-x-0 bottom-0 h-[320px] bg-gradient-to-t from-[#fdfcf8]/95 via-[#fdfcf8]/65 to-transparent" />
             </div>
 
-            {/* =================================================
-                CHAT
-            ================================================= */}
 
             <div
                 ref={chatScrollRef}
@@ -705,9 +700,6 @@ export default function AIAssistantPage() {
                                     )
                                 )}
 
-                                {/* =================================================
-                                    LOADING
-                                ================================================= */}
 
                                 {isTyping && (
                                     <TypingIndicator />
@@ -718,124 +710,122 @@ export default function AIAssistantPage() {
                 )}
             </div>
 
-            {/* =================================================
-                FIXED INPUT
-            ================================================= */}
+            {showAISearchBar && (
+                <div className="relative z-30 shrink-0 border-t border-white/40 bg-gradient-to-t from-[#fdfcf8] via-[#fdfcf8]/96 to-transparent px-4 pb-3 pt-3 sm:px-6 sm:pb-4 sm:pt-4 lg:px-8">
+                    <div className="mx-auto w-full max-w-[900px]">
+                        <div className="rounded-[30px] border border-[#dfe8e2] bg-white/97 p-2 shadow-[0_15px_48px_rgba(26,69,43,0.16)] backdrop-blur-2xl transition-all focus-within:border-[#b8d6c1] focus-within:shadow-[0_17px_52px_rgba(26,69,43,0.20)] sm:p-2.5">
+                            <div className="flex min-h-[60px] items-center gap-2 rounded-[23px] bg-[#f8faf8] px-3 sm:min-h-[64px] sm:px-4">
+                                <Sparkles
+                                    size={20}
+                                    strokeWidth={1.8}
+                                    className="shrink-0 text-[#74817a]"
+                                />
 
-            <div className="relative z-30 shrink-0 border-t border-white/40 bg-gradient-to-t from-[#fdfcf8] via-[#fdfcf8]/96 to-transparent px-4 pb-3 pt-3 sm:px-6 sm:pb-4 sm:pt-4 lg:px-8">
-                <div className="mx-auto w-full max-w-[900px]">
-                    <div className="rounded-[30px] border border-[#dfe8e2] bg-white/97 p-2 shadow-[0_15px_48px_rgba(26,69,43,0.16)] backdrop-blur-2xl transition-all focus-within:border-[#b8d6c1] focus-within:shadow-[0_17px_52px_rgba(26,69,43,0.20)] sm:p-2.5">
-                        <div className="flex min-h-[60px] items-center gap-2 rounded-[23px] bg-[#f8faf8] px-3 sm:min-h-[64px] sm:px-4">
-                            <Sparkles
-                                size={20}
-                                strokeWidth={1.8}
-                                className="shrink-0 text-[#74817a]"
-                            />
-
-                            <input
-                                type="text"
-                                value={question}
-                                onChange={(
-                                    event
-                                ) =>
-                                    setQuestion(
+                                <input
+                                    type="text"
+                                    value={question}
+                                    onChange={(
                                         event
-                                            .target
-                                            .value
-                                    )
-                                }
-                                onKeyDown={
-                                    handleKeyDown
-                                }
-                                disabled={
-                                    isTyping
-                                }
-                                placeholder={
-                                    isListening
-                                        ? "Listening... speak naturally"
-                                        : hasStartedChat
-                                            ? "Ask a follow-up question..."
-                                            : "Ask about a government scheme..."
-                                }
-                                className="min-w-0 flex-1 bg-transparent py-3 text-[14px] text-[#172033] outline-none placeholder:text-[#8a9690] sm:text-[15px]"
-                            />
-
-                            {/* VOICE */}
-
-                            <div className="relative shrink-0">
-                                {isListening && (
-                                    <span className="absolute inset-0 animate-ping rounded-full bg-[#08783f]/15" />
-                                )}
-
-                                <button
-                                    type="button"
-                                    onClick={
-                                        handleVoiceInput
+                                    ) =>
+                                        setQuestion(
+                                            event
+                                                .target
+                                                .value
+                                        )
+                                    }
+                                    onKeyDown={
+                                        handleKeyDown
                                     }
                                     disabled={
                                         isTyping
                                     }
-                                    aria-label={
+                                    placeholder={
                                         isListening
-                                            ? "Stop listening"
-                                            : "Speak your question"
+                                            ? "Listening... speak naturally"
+                                            : hasStartedChat
+                                                ? "Ask a follow-up question..."
+                                                : "Ask about a government scheme..."
                                     }
-                                    className={`relative flex h-10 w-10 items-center justify-center rounded-full border transition-all sm:h-11 sm:w-11 ${isListening
-                                        ? "border-[#08783f] bg-[#e7f5eb] text-[#08783f]"
-                                        : "border-[#dce5df] bg-white text-[#08783f] hover:border-[#08783f] hover:bg-[#f1f8f2]"
-                                        }`}
-                                >
-                                    <Mic
-                                        size={18}
-                                        strokeWidth={
-                                            1.8
+                                    className="min-w-0 flex-1 bg-transparent py-3 text-[14px] text-[#172033] outline-none placeholder:text-[#8a9690] sm:text-[15px]"
+                                />
+
+                                {/* VOICE */}
+
+                                <div className="relative shrink-0">
+                                    {isListening && (
+                                        <span className="absolute inset-0 animate-ping rounded-full bg-[#08783f]/15" />
+                                    )}
+
+                                    <button
+                                        type="button"
+                                        onClick={
+                                            handleVoiceInput
                                         }
+                                        disabled={
+                                            isTyping
+                                        }
+                                        aria-label={
+                                            isListening
+                                                ? "Stop listening"
+                                                : "Speak your question"
+                                        }
+                                        className={`relative flex h-10 w-10 items-center justify-center rounded-full border transition-all sm:h-11 sm:w-11 ${isListening
+                                            ? "border-[#08783f] bg-[#e7f5eb] text-[#08783f]"
+                                            : "border-[#dce5df] bg-white text-[#08783f] hover:border-[#08783f] hover:bg-[#f1f8f2]"
+                                            }`}
+                                    >
+                                        <Mic
+                                            size={18}
+                                            strokeWidth={
+                                                1.8
+                                            }
+                                        />
+                                    </button>
+                                </div>
+
+                                {/* SEND */}
+
+                                <button
+                                    type="button"
+                                    onClick={
+                                        handleAsk
+                                    }
+                                    aria-label="Send question to Sahay AI"
+                                    disabled={
+                                        !question.trim() ||
+                                        isTyping
+                                    }
+                                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#08783f] text-white shadow-[0_5px_16px_rgba(8,120,63,0.22)] transition-all hover:bg-[#056b37] disabled:cursor-not-allowed disabled:opacity-35 sm:h-11 sm:w-11"
+                                >
+                                    <Send
+                                        size={18}
+                                        strokeWidth={2}
                                     />
                                 </button>
                             </div>
+                        </div>
 
-                            {/* SEND */}
-
-                            <button
-                                type="button"
-                                onClick={
-                                    handleAsk
-                                }
-                                aria-label="Send question to Sahay AI"
-                                disabled={
-                                    !question.trim() ||
-                                    isTyping
-                                }
-                                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#08783f] text-white shadow-[0_5px_16px_rgba(8,120,63,0.22)] transition-all hover:bg-[#056b37] disabled:cursor-not-allowed disabled:opacity-35 sm:h-11 sm:w-11"
-                            >
-                                <Send
-                                    size={18}
-                                    strokeWidth={2}
+                        {!hasStartedChat ? (
+                            <div className="mt-2 flex items-center justify-center gap-2 text-[11px] text-[#63806d] sm:text-[12px]">
+                                <CheckCircle2
+                                    size={13}
+                                    className="text-[#08783f]"
                                 />
-                            </button>
-                        </div>
+
+                                <span>
+                                    Reliable information.
+                                    Simple language.
+                                    Better tomorrow.
+                                </span>
+                            </div>
+                        ) : (
+                            <p className="mt-1.5 text-center text-[10px] text-[#8a9690]">
+                                Sahay AI helps you discover Bihar government schemes. Always verify eligibility with the official department.
+                            </p>
+                        )}
                     </div>
-
-                    {!hasStartedChat ? (
-                        <div className="mt-2 flex items-center justify-center gap-2 text-[11px] text-[#63806d] sm:text-[12px]">
-                            <CheckCircle2
-                                size={13}
-                                className="text-[#08783f]"
-                            />
-
-                            <span>
-                                Reliable information.
-                                Simple language.
-                                Better tomorrow.
-                            </span>
-                        </div>
-                    ) : (
-                        <p className="mt-1.5 text-center text-[10px] text-[#8a9690]">
-                            Sahay AI helps you discover Bihar government schemes. Always verify eligibility with the official department.
-                        </p>
-                    )}
                 </div>
-            </div>
+            )}
         </main>
     );
 }
